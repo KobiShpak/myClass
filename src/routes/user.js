@@ -76,6 +76,7 @@ router.delete('/user', (req, res) => {
 
 // Create a new user
 // POST localhost:3000/user
+// TODO: add required fields upon creation besides email
 router.post('/user', (req, res) => {
     if (!req.body) {
         return res.status(400).send('Request body is missing')

@@ -75,6 +75,7 @@ router.delete('/class', (req, res) => {
 
 // Create a new class
 // POST localhost:3000/class
+// TODO: add required fields upon creation besides email
 router.post('/class', (req, res) => {
     if (!req.body) {
         return res.status(400).send('Request body is missing')
