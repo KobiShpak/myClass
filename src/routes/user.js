@@ -7,7 +7,6 @@ let router = express.Router()
 router.get('/users', (req, res) => {
     UserModel.find({})
     .then(doc => {
-        console.log(doc)
         res.json(doc)
     })
     .catch(err => {

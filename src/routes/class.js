@@ -14,6 +14,37 @@ router.get('/classes', (req, res) => {
     })
 })
 
+// Get all classes of a user
+// GET localhost:3000/user?email=kobi@gmail.com
+router.get('/classesOfUser', (req, res) => {
+    if (!req.query.email){
+        return res.status(400).send('Missing URL parameter: email')
+    }
+
+    ClassModel.aggregate([
+        {
+            $match:{
+                $or: [
+                    {students: req.query.email},
+                    {teacher: req.query.email}
+                ]}
+        },
+        {
+            $project:{
+                id: 1, 
+                name: 1, 
+                icon: 1 
+            }
+        }
+    ])
+    .then(doc => {
+        res.json(doc)
+    })
+    .catch(err => {
+        res.status(500),json(err)
+    })
+})
+
 // Get a class
 // GET localhost:3000/class?id=1234
 router.get('/class', (req, res) => {
@@ -75,7 +106,6 @@ router.delete('/class', (req, res) => {
 
 // Create a new class
 // POST localhost:3000/class
-// TODO: add required fields upon creation besides email
 router.post('/class', (req, res) => {
     if (!req.body) {
         return res.status(400).send('Request body is missing')
