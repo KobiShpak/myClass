@@ -3,7 +3,7 @@ let mongoose = require('mongoose')
 const user = 'Admin'
 const password = 'NatanelTheKing1234'
 const server = 'myclass-8xnfx.mongodb.net'
-const database = 'Users'
+const database = 'myClass'
 
 mongoose.connect(`mongodb+srv://${user}:${password}@${server}/${database}`, {
     useNewUrlParser: true,
@@ -19,6 +19,7 @@ let UserSchema = new mongoose.Schema({
     }, 
     password: String, // Should be hashed
     type: String, // (Teacher/Student)
+    picture: String, // pic url
     classes: [Number], // class_id(s)
     grades: [Map], // Key: class_id, quiz_id, Value: grade 
     attendance: [Map] // Key: class_id, Value: attendance
