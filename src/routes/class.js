@@ -84,6 +84,25 @@ router.put('/class', (req, res) => {
     })
 })
 
+// Update a specific class field
+// PATCH localhost:3000/class?id=1234
+router.patch('/class', (req, res) => {
+    if (!req.query.id){
+        return res.status(400).send('Missing URL parameter: id')
+    }
+    
+    ClassModel.findOneAndUpdate({
+        id: req.query.id
+    }, req.body, {
+        new: true
+    })
+    .then(doc => {
+        res.json(doc)
+    })
+    .catch(err => {
+        res.status(500),json(err)
+    })
+})
 
 // Delete a class
 // DELETE localhost:3000/class?id=1234
