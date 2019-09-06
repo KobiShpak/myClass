@@ -54,6 +54,26 @@ router.put('/user', (req, res) => {
 })
 
 
+// Update a specific user field
+// PATCH localhost:3000/user?email=kobi@gmail.com
+router.patch('/user', (req, res) => {
+    if (!req.query.email){
+        return res.status(400).send('Missing URL parameter: email')
+    }
+    
+    UserModel.findOneAndUpdate({
+        email: req.query.email
+    }, req.body, {
+        new: true
+    })
+    .then(doc => {
+        res.json(doc)
+    })
+    .catch(err => {
+        res.status(500),json(err)
+    })
+})
+
 // Delete a user
 // DELETE localhost:3000/user?email=kobi@gmail.com
 router.delete('/user', (req, res) => {
@@ -75,7 +95,6 @@ router.delete('/user', (req, res) => {
 
 // Create a new user
 // POST localhost:3000/user
-// TODO: add required fields upon creation besides email
 router.post('/user', (req, res) => {
     if (!req.body) {
         return res.status(400).send('Request body is missing')
