@@ -14,7 +14,7 @@ let ClassSchema = new mongoose.Schema({
     name: String,
     icon: String, // icon url
     id: {
-        type: String,
+        type: Number,
         required: true,
         unique: true
     }, 
