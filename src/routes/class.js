@@ -21,14 +21,7 @@ router.get('/classesUserCanRegister', (req, res) => {
         return res.status(400).send('Missing URL parameter: email')
     }
 
-    ClassModel.aggregate([{
-        $match: {
-            $not: {
-                students: req.query.email
-            }
-        }
-    }
-    ])
+    ClassModel.find({students: {$not: {$eq: req.query.email}}})
     .then(doc => {
         res.json(doc)
     })
