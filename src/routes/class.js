@@ -21,13 +21,13 @@ router.get('/classesUserCanRegister', (req, res) => {
         return res.status(400).send('Missing URL parameter: email')
     }
 
-    ClassModel.find({students: {$not: {$eq: req.query.email}}})
-    .then(doc => {
-        res.json(doc)
-    })
-    .catch(err => {
-        res.status(500), json(err)
-    })
+    ClassModel.find({ students: { $not: { $eq: req.query.email } } })
+        .then(doc => {
+            res.json(doc)
+        })
+        .catch(err => {
+            res.status(500), json(err)
+        })
 })
 
 // Get all classes of a user
@@ -54,12 +54,12 @@ router.get('/classesOfUser', (req, res) => {
             }
         }
     ])
-    .then(doc => {
-        res.json(doc)
-    })
-    .catch(err => {
-        res.status(500), json(err)
-    })
+        .then(doc => {
+            res.json(doc)
+        })
+        .catch(err => {
+            res.status(500), json(err)
+        })
 })
 
 // Get the upcoming class of a user
@@ -71,7 +71,7 @@ router.get('/nextClass', (req, res) => {
 
     var date = new Date()
     var weekday = new Array(7)
-    weekday[0] =  "Sunday"
+    weekday[0] = "Sunday"
     weekday[1] = "Monday"
     weekday[2] = "Tuesday"
     weekday[3] = "Wednesday"
@@ -97,18 +97,18 @@ router.get('/nextClass', (req, res) => {
             }
         },
     ])
-    .sort({
-        $sort: {
-            "time.day": 1,
-            "time.from": 1
-        }    
-    })
-    .then(doc => {
-        res.json(doc)
-    })
-    .catch(err => {
-        res.status(500), json(err)
-    })
+        .sort({
+            $sort: {
+                "time.day": 1,
+                "time.from": 1
+            }
+        })
+        .then(doc => {
+            res.json(doc)
+        })
+        .catch(err => {
+            res.status(500), json(err)
+        })
 })
 
 // Get a class
@@ -121,12 +121,12 @@ router.get('/class', (req, res) => {
     ClassModel.findOne({
         id: req.query.id
     })
-    .then(doc => {
-        res.json(doc)
-    })
-    .catch(err => {
-        res.status(500), json(err)
-    })
+        .then(doc => {
+            res.json(doc)
+        })
+        .catch(err => {
+            res.status(500), json(err)
+        })
 })
 
 
@@ -218,7 +218,7 @@ router.get('/classQuizes', (req, res) => {
         return res.status(400).send('Missing URL parameter: id')
     }
 
-    ClassModel.aggregate([{$project: {quizes: 1}}])}
-)
+    ClassModel.aggregate([{$project: {quizes: 1}}])
+})
 
 module.exports = router

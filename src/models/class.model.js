@@ -19,14 +19,25 @@ let ClassSchema = new mongoose.Schema({
         unique: true
     }, 
     location: String, 
-    time: {
-        type: [Map],
-        of: String
-    },
+    time: [{
+        day: Number,
+        from: String,
+        until: String
+    }],
     teacher: String, // teacher_email
     students: [String], // student_email(s)
     items: [Number], // id's of files loaded in the mongo bucket 
-    quizes: [String] // quiz urls
+    quizes: [{
+        quiz_id: Number,
+        questions: [{
+            question: String,
+            answers: [{
+                answer_id: Number,
+                answer: String,
+                correct: Boolean
+            }] 
+        }]
+    }]
 })
 
 module.exports = mongoose.model('Class', ClassSchema)
