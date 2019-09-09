@@ -28,7 +28,7 @@ let ClassSchema = new mongoose.Schema({
     students: [String], // student_email(s)
     items: [Number], // id's of files loaded in the mongo bucket 
     quizes: [{
-        quiz_id: Number,
+        quiz_name: String,
         questions: [{
             question: String,
             answers: [{
