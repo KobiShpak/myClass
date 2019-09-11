@@ -48,7 +48,7 @@ router.get('/classesOfUser', (req, res) => {
         },
         {
             $project: {
-                id: 1,
+                _id: 1,
                 name: 1,
                 icon: 1
             }
@@ -91,7 +91,7 @@ router.get('/nextClass', (req, res) => {
         },
         {
             $project: {
-                id: 1,
+                _id: 1,
                 name: 1,
                 icon: 1
             }
@@ -119,7 +119,7 @@ router.get('/class', (req, res) => {
     }
 
     ClassModel.findOne({
-        id: req.query.id
+        _id: req.query.id
     })
         .then(doc => {
             res.json(doc)
@@ -138,7 +138,7 @@ router.put('/class', (req, res) => {
     }
 
     ClassModel.findOneAndUpdate({
-        id: req.query.id
+        _id: req.query.id
     }, req.body, {
             new: true
         })
@@ -158,7 +158,7 @@ router.patch('/class', (req, res) => {
     }
 
     ClassModel.findOneAndUpdate({
-        id: req.query.id
+        _id: req.query.id
     }, req.body, {
             new: true
         })
@@ -178,7 +178,7 @@ router.delete('/class', (req, res) => {
     }
 
     ClassModel.findOneAndRemove({
-        id: req.query.id
+        _id: req.query.id
     })
         .then(doc => {
             res.json(doc)
@@ -207,18 +207,6 @@ router.post('/class', (req, res) => {
         .catch(err => {
             res.status(500).json(err)
         })
-})
-
-//================== QUIZ APIs ==================//
-
-// GET all quizes of a class
-// GET localhost:3000/classQuizes?id=1111
-router.get('/classQuizes', (req, res) => {
-    if (!req.query.id) {
-        return res.status(400).send('Missing URL parameter: id')
-    }
-
-    ClassModel.aggregate([{$project: {quizes: 1}}])
 })
 
 module.exports = router

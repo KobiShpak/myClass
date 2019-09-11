@@ -13,11 +13,6 @@ mongoose.connect(`mongodb+srv://${user}:${password}@${server}/${database}`, {
 let ClassSchema = new mongoose.Schema({
     name: String,
     icon: String, // icon url
-    id: {
-        type: Number,
-        required: true,
-        unique: true
-    }, 
     location: String, 
     time: [{
         day: Number,
