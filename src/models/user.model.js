@@ -20,7 +20,7 @@ let UserSchema = new mongoose.Schema({
     password: String, // Should be hashed
     type: String, // (Teacher/Student)
     picture: String, // pic url
-    classes: [Number], // class_id(s)
+    classes: [String], // class_id(s)
     grades: [Map], // Key: class_id, quiz_id, Value: grade 
     attendance: [Map] // Key: class_id, Value: attendance
 })
