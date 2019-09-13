@@ -50,7 +50,10 @@ router.get('/classesOfUser', (req, res) => {
             $project: {
                 _id: 1,
                 name: 1,
-                icon: 1
+                icon: 1,
+                time: 1,
+                location: 1,
+                teacher: 1
             }
         }
     ])
