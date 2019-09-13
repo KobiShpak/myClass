@@ -2,9 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hello World</title>
+    <title>Welcome to myClass!</title>
 </head>
 <body>
-Welcome to express!!
+<!--  SINGLE FILE -->
+<form action="/user" enctype="multipart/form-data" method="POST"> 
+    <input type="file" name="picture" />
+    <input type="submit" value="Upload a file"/>
+ </form>
+   
+   <!--   PHOTO-->
+  
+ <form action="/user" enctype="multipart/form-data" method="POST"> 
+   <input type="file" name="picture" accept="image/*" />
+   <input type="submit" value="Upload Photo"/>
+ </form>
+ 
 </body>
 </html>
