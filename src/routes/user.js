@@ -1,6 +1,31 @@
 let UserModel = require('../models/user.model')
 let express = require('express')
 let router = express.Router()
+let multer = require('multer')
+
+let storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './public/uploads')
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + '-' + file.originalname)
+    }
+  })
+
+let fileFilter = (req, file, cb) => {
+    if (file.mimetype.includes('image/'))
+        cb(null, true)
+    else
+        cb(null, false)
+}
+   
+let upload = multer({ 
+    storage: storage,
+    limits: {
+        filesize: 1024 * 1024 * 5
+    },
+    fileFilter: fileFilter
+ })
 
 // Get all users
 // GET localhost:3000/users
@@ -95,12 +120,13 @@ router.delete('/user', (req, res) => {
 
 // Create a new user
 // POST localhost:3000/user
-router.post('/user', (req, res) => {
+router.post('/user', upload.single('picture'), (req, res) => {
     if (!req.body) {
         return res.status(400).send('Request body is missing')
     }
-        
     let model = new UserModel(req.body)
+
+    model.set({picture: req.file.path})
     model.save()
     .then(doc => {
         if (!doc || doc.length === 0) {

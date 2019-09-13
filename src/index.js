@@ -4,8 +4,10 @@ let classRoute = require('./routes/class')
 let userRoute = require('./routes/user')
 let path = require('path')
 let bodyParser = require('body-parser')
+let multer = require('multer')
 
-app.use(bodyParser.json())
+// this should be revisioned
+app.use(bodyParser.urlencoded({extended: true}))
 app.use((req, res, next) => {
     console.log(`${new Date().toString()} ${req.ip} => ${req.originalUrl}`, req.body)
     next()
