@@ -27,7 +27,7 @@ let ClassSchema = new mongoose.Schema({
     items: [{
         type: String,
         name: String,
-        link: String
+        source: String
     }],  
     quizes: [{
         quiz_name: String,
